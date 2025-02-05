@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Invitation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f7f7f7;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            color: #333;
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        button:first-of-type {
+            background-color: #28a745;
+            color: white;
+        }
+        button:first-of-type:hover {
+            background-color: #218838;
+        }
+        button:last-of-type {
+            background-color: #dc3545;
+            color: white;
+        }
+        button:last-of-type:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Imbitasyon sa Kaarawan!</h2>
+        <p>Pakiusap, ipaalam sa amin kung makakadalo ka sa selebrasyon.</p>
+        <input type="text" id="guestName" placeholder="Ilagay ang iyong pangalan" required>
+        <br>
+        <button onclick="submitResponse('Yes')">✅ Makakadalo Ako</button>
+        <button onclick="submitResponse('No')">❌ Hindi Ako Makakadalo</button>
+    </div>
+
+    <script>
+        function submitResponse(response) {
+            let name = document.getElementById("guestName").value;
+            if (name.trim() === "") {
+                alert("Pakilagay ang iyong pangalan bago magsagot.");
+                return;
+            }
+            
+            let url = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+            
+            fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams({ "name": name, "response": response })
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert("Salamat sa iyong sagot!");
+                document.getElementById("guestName").value = "";
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>
