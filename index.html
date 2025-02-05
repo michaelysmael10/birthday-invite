@@ -72,23 +72,24 @@
                 alert("Pakilagay ang iyong pangalan bago magsagot.");
                 return;
             }
-            
-            let url = "https://script.google.com/macros/s/AKfycbwoijtlkBjcyeK3KESKBq27xM8_vlhEuCqnaiyYFLKP/dev";
 
-        
-            
+        let url = "https://script.google.com/macros/s/AKfycbwoijtlkBjcyeK3KESKBq27xM8_vlhEuCqnaiyYFLKP/dev";
+
             fetch(url, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ "name": name, "response": response })
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams({ "name": name, "response": response })
             })
             .then(response => response.text())
             .then(data => {
-                alert("Salamat sa iyong sagot!");
+                alert("Salamat sa iyong sagot! ✅");
                 document.getElementById("guestName").value = "";
             })
-            .catch(error => console.error("Error:", error));
-}
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Nagkaroon ng error sa pagsumite. ❌");
+            });
+        }
 
     </script>
 </body>
