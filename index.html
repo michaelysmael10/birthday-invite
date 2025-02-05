@@ -73,12 +73,14 @@
                 return;
             }
             
-            let url = "https://script.google.com/macros/s/AKfycbwTGiGadxujnBHy_YGP_l-z5RijEfK2SiXiGFRbB52C4Vs_sISGY4YzDaS56BSDqmO6/exec/exec";
+            let url = "https://script.google.com/macros/s/AKfycbwoijtlkBjcyeK3KESKBq27xM8_vlhEuCqnaiyYFLKP/dev";
+
+        
             
             fetch(url, {
                 method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams({ "name": name, "response": response })
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ "name": name, "response": response })
             })
             .then(response => response.text())
             .then(data => {
@@ -86,7 +88,8 @@
                 document.getElementById("guestName").value = "";
             })
             .catch(error => console.error("Error:", error));
-        }
+}
+
     </script>
 </body>
 </html>
